@@ -8,7 +8,7 @@ function Brand(){return <span className="brand"><img src="/imper-logo-transparen
 export default function Home(){
  const[menu,setMenu]=useState(false),[sent,setSent]=useState(false);
  return <main>
-  <header><a href="#inicio"><Brand/></a><button className="menu-button" onClick={()=>setMenu(!menu)} aria-label={menu?"Fechar menu":"Abrir menu"}>{menu?<X/>:<Menu/>}</button><nav className={menu?"open":""}><a href="#solucoes">Soluções</a><a href="#simulacao">Simulação</a><a href="#contato">Contato</a></nav><a className="header-button" href="#simulacao">Simular crédito</a></header>
+  <header><a href="#inicio"><Brand/></a><button className="menu-button" onClick={()=>setMenu(!menu)} aria-expanded={menu} aria-label={menu?"Fechar menu":"Abrir menu"}>{menu?<X/>:<Menu/>}</button><nav className={menu?"open":""}><a href="#solucoes" onClick={()=>setMenu(false)}>Soluções</a><a href="#simulacao" onClick={()=>setMenu(false)}>Simulação</a><a href="#contato" onClick={()=>setMenu(false)}>Contato</a></nav><a className="header-button" href="#simulacao">Simular crédito</a></header>
 
   <section className="hero" id="inicio"><p className="tag">IMPER CREDI BRASIL</p><h1>Crédito direto.<br/><span>Atendimento de verdade.</span></h1><p>Soluções financeiras com clareza, segurança e acompanhamento.</p><a className="button red" href="#simulacao">Fazer simulação <ArrowRight size={18}/></a></section>
 

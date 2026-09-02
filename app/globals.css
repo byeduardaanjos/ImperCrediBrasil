@@ -22,6 +22,8 @@ header{height:78px;position:fixed;inset:0 0 auto;z-index:50;padding:0 clamp(1.2r
 .hero .red{border:1px solid #ed2732;box-shadow:0 12px 35px #bc111b45}
 .trust{background:#070707e8;border-color:#c5a55742}
 
+header{background:linear-gradient(180deg,#0505058f 0%,transparent 100%);border-bottom:0;backdrop-filter:none}
+
 @media(max-width:850px){.simulation,.contact{grid-template-columns:1fr}.contact>div{padding:0 0 2.5rem}.contact>a{border-left:0;border-top:1px solid var(--line)}}
 @media(max-width:700px){header{height:70px}.brand{width:90px;height:39px}.header-button{display:none}.menu-button{display:block}header nav{position:fixed;inset:70px 0 auto;padding:1.2rem;flex-direction:column;background:#070707;border-bottom:1px solid var(--line);transform:translateY(-130%);opacity:0;transition:.2s}header nav.open{transform:none;opacity:1}header nav a{padding:.8rem}.hero{min-height:700px;padding-top:120px}.hero h1{font-size:clamp(3.2rem,15vw,5rem)}.trust,.cards{grid-template-columns:1fr}.trust{padding-block:.5rem}.trust span{min-height:56px}.trust span+span{border-left:0;border-top:1px solid var(--line)}.section{padding-block:5rem}.cards article{min-height:250px}.row{grid-template-columns:1fr}footer{grid-template-columns:1fr;justify-items:center;text-align:center}footer small{text-align:center}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}

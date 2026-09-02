@@ -1,5 +1,5 @@
 "use client";
-import {useState} from "react";
+import {useEffect,useState} from "react";
 import {ArrowRight,BriefcaseBusiness,Building2,Check,Landmark,Menu,MessageCircle,ShieldCheck,UserRound,X} from "lucide-react";
 
 const solutions=[[UserRound,"Crédito pessoal","Para planos, projetos e imprevistos."],[Landmark,"Com garantia","Mais prazo e condições diferenciadas."],[BriefcaseBusiness,"Para empresas","Crédito para apoiar o seu negócio."]] as const;
@@ -7,6 +7,13 @@ function Brand(){return <span className="brand"><img src="/imper-logo-transparen
 
 export default function Home(){
  const[menu,setMenu]=useState(false),[sent,setSent]=useState(false);
+ useEffect(()=>{
+  const elements=document.querySelectorAll(".trust,.section,.contact,footer,.cards article");
+  elements.forEach(element=>element.classList.add("reveal"));
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("visible");observer.unobserve(entry.target)}}),{threshold:.12});
+  elements.forEach(element=>observer.observe(element));
+  return()=>observer.disconnect();
+ },[]);
  return <main>
   <header><a href="#inicio"><Brand/></a><button className="menu-button" onClick={()=>setMenu(!menu)} aria-expanded={menu} aria-label={menu?"Fechar menu":"Abrir menu"}>{menu?<X/>:<Menu/>}</button><nav className={menu?"open":""}><a href="#solucoes" onClick={()=>setMenu(false)}>Soluções</a><a href="#simulacao" onClick={()=>setMenu(false)}>Simulação</a><a href="#contato" onClick={()=>setMenu(false)}>Contato</a></nav><a className="header-button" href="#simulacao">Simular crédito</a></header>
 

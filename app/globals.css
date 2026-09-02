@@ -79,7 +79,7 @@ header{background:linear-gradient(180deg,#111111c7 0%,#0909099e 72%,#09090966 10
 .hero h1{animation:heroEnter .8s .1s ease-out both}
 .hero>p:not(.tag){animation:heroEnter .8s .2s ease-out both}
 .hero>.button{animation:heroEnter .8s .3s ease-out both}
-.reveal{opacity:0;transform:translateY(48px) scale(.985);transition:opacity .85s cubic-bezier(.2,.75,.25,1),transform .85s cubic-bezier(.2,.75,.25,1)}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .68s cubic-bezier(.2,.75,.25,1),transform .68s cubic-bezier(.2,.75,.25,1)}
 .reveal.visible{opacity:1;transform:none}
 .cards article.reveal:nth-child(2){transition-delay:.1s}.cards article.reveal:nth-child(3){transition-delay:.2s}
 .cards article{transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
@@ -92,5 +92,10 @@ header{background:linear-gradient(180deg,#111111c7 0%,#0909099e 72%,#09090966 10
 .hero .button{position:relative;overflow:hidden;isolation:isolate}
 .hero .button:after{content:"";position:absolute;inset:-35% auto -35% -30%;width:22%;background:linear-gradient(90deg,transparent,#ffffff85,transparent);animation:buttonShine 3.4s ease-in-out infinite;pointer-events:none}
 .trust svg{animation:iconFloat 2.8s ease-in-out infinite}.trust span:nth-child(2) svg{animation-delay:.35s}.trust span:nth-child(3) svg{animation-delay:.7s}
-@media(max-width:700px){.hero{animation-duration:13s}.cards article:active{transform:scale(.985)}}
+@media(max-width:700px){
+ .hero{animation:none;background-position:62% center}
+ header{backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+ .hero h1:after,.hero .button:after,.trust svg{will-change:transform}
+ .cards article:active{transform:scale(.985)}
+}
 @media(prefers-reduced-motion:reduce){.hero,.hero .tag,.hero h1,.hero h1:after,.hero>p:not(.tag),.hero>.button,.hero .button:after,.trust svg{animation:none!important}.reveal{opacity:1!important;transform:none!important}}

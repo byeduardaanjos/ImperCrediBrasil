@@ -70,13 +70,16 @@ header{background:linear-gradient(180deg,#0505058f 0%,transparent 100%);border-b
 }
 
 @keyframes heroEnter{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-@keyframes backgroundDrift{0%{background-position:50% center}50%{background-position:54% center}100%{background-position:50% center}}
-.hero{animation:backgroundDrift 18s ease-in-out infinite}
+@keyframes backgroundDrift{0%{background-position:48% center}50%{background-position:60% center}100%{background-position:48% center}}
+@keyframes redLinePulse{0%,100%{transform:scaleX(.72);opacity:.65;box-shadow:0 0 8px #bc111b66}50%{transform:scaleX(1);opacity:1;box-shadow:0 0 22px #ed2732}}
+@keyframes buttonShine{0%,28%{transform:translateX(-180%) skewX(-18deg)}58%,100%{transform:translateX(280%) skewX(-18deg)}}
+@keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.hero{animation:backgroundDrift 11s ease-in-out infinite}
 .hero .tag{animation:heroEnter .65s ease-out both}
 .hero h1{animation:heroEnter .8s .1s ease-out both}
 .hero>p:not(.tag){animation:heroEnter .8s .2s ease-out both}
 .hero>.button{animation:heroEnter .8s .3s ease-out both}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal{opacity:0;transform:translateY(48px) scale(.985);transition:opacity .85s cubic-bezier(.2,.75,.25,1),transform .85s cubic-bezier(.2,.75,.25,1)}
 .reveal.visible{opacity:1;transform:none}
 .cards article.reveal:nth-child(2){transition-delay:.1s}.cards article.reveal:nth-child(3){transition-delay:.2s}
 .cards article{transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
@@ -85,5 +88,9 @@ header{background:linear-gradient(180deg,#0505058f 0%,transparent 100%);border-b
 .button:hover{transform:translateY(-2px)}.button svg,.contact>a>svg:last-child,.cards a svg{transition:transform .22s ease}
 .button:hover svg,.contact>a:hover>svg:last-child,.cards a:hover svg{transform:translateX(5px)}
 .contact>a:hover{background:#ffffff08}
-@media(max-width:700px){.hero{animation-duration:24s}.cards article:active{transform:scale(.985)}}
-@media(prefers-reduced-motion:reduce){.hero,.hero .tag,.hero h1,.hero>p:not(.tag),.hero>.button{animation:none!important}.reveal{opacity:1!important;transform:none!important}}
+.hero h1:after{transform-origin:left center;animation:redLinePulse 2.4s ease-in-out infinite}
+.hero .button{position:relative;overflow:hidden;isolation:isolate}
+.hero .button:after{content:"";position:absolute;inset:-35% auto -35% -30%;width:22%;background:linear-gradient(90deg,transparent,#ffffff85,transparent);animation:buttonShine 3.4s ease-in-out infinite;pointer-events:none}
+.trust svg{animation:iconFloat 2.8s ease-in-out infinite}.trust span:nth-child(2) svg{animation-delay:.35s}.trust span:nth-child(3) svg{animation-delay:.7s}
+@media(max-width:700px){.hero{animation-duration:13s}.cards article:active{transform:scale(.985)}}
+@media(prefers-reduced-motion:reduce){.hero,.hero .tag,.hero h1,.hero h1:after,.hero>p:not(.tag),.hero>.button,.hero .button:after,.trust svg{animation:none!important}.reveal{opacity:1!important;transform:none!important}}

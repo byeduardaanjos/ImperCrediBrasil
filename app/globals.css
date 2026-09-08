@@ -29,7 +29,8 @@ header{background:linear-gradient(180deg,#111111c7 0%,#0909099e 72%,#09090966 10
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 
 @media(max-width:700px){
- html,body{width:100%;overflow-x:hidden}
+ html{overflow-x:clip;overflow-y:auto}
+ body{width:100%;min-height:100%;overflow-x:clip;overflow-y:visible;touch-action:pan-y;-webkit-overflow-scrolling:touch}
  header{height:66px;padding:0 1rem;background:linear-gradient(180deg,#111111c4,#0909098f);border-bottom:1px solid #c5a55735;box-shadow:0 9px 26px #00000070,inset 0 1px 0 #ffffff1a;backdrop-filter:blur(13px) saturate(125%);-webkit-backdrop-filter:blur(13px) saturate(125%)}
  .brand{width:78px;height:34px}
  .menu-button{width:42px;height:42px;display:grid;place-items:center;padding:0}
@@ -62,7 +63,7 @@ header{background:linear-gradient(180deg,#111111c7 0%,#0909099e 72%,#09090966 10
  footer .brand{width:86px;height:38px}
  .menu-button{color:var(--gold);border:1px solid #c5a55766;border-radius:50%;background:#08080880;transition:.2s}
  .menu-button[aria-expanded="true"]{color:#fff;background:var(--red);border-color:var(--red)}
- header nav{inset:74px 1rem auto;padding:.55rem 1.1rem;gap:0;background:#0b0b0bf2;border:1px solid #c5a55755;border-radius:12px;box-shadow:0 22px 55px #000b;backdrop-filter:blur(18px);transform:translateY(-12px) scale(.98);transform-origin:top;opacity:0;visibility:hidden;pointer-events:none}
+ header nav{inset:74px 1rem auto;padding:.55rem 1.1rem;gap:0;background:#0b0b0bfa;border:1px solid #c5a55755;border-radius:12px;box-shadow:0 22px 55px #000b;backdrop-filter:none;-webkit-backdrop-filter:none;transform:translateY(-12px) scale(.98);transform-origin:top;opacity:0;visibility:hidden;pointer-events:none}
  header nav.open{transform:translateY(0) scale(1);opacity:1;visibility:visible;pointer-events:auto}
  header nav a{position:relative;padding:1rem .25rem;color:#f1eee8;font-size:.78rem;letter-spacing:.06em}
  header nav a+a{border-top:1px solid #ffffff16}

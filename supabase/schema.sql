@@ -37,3 +37,54 @@ create policy "public_can_create_new_lead"
     and notes is null
     and source = 'site'
   );
+
+create table public.staff_members (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  display_name text not null check (char_length(display_name) between 2 and 100),
+  active boolean not null default true,
+  created_at timestamptz not null default now()
+);
+
+create index staff_members_active_idx on public.staff_members (active) where active = true;
+
+alter table public.staff_members enable row level security;
+
+revoke all on table public.staff_members from anon, authenticated;
+grant select on table public.staff_members to authenticated;
+grant select, insert, update, delete on table public.staff_members to service_role;
+
+create policy "staff_can_view_own_membership"
+  on public.staff_members
+  for select
+  to authenticated
+  using ((select auth.uid()) = user_id);
+
+grant select, update on table public.leads to authenticated;
+
+create policy "active_staff_can_view_leads"
+  on public.leads
+  for select
+  to authenticated
+  using (
+    exists (
+      select 1 from public.staff_members
+      where user_id = (select auth.uid()) and active = true
+    )
+  );
+
+create policy "active_staff_can_update_leads"
+  on public.leads
+  for update
+  to authenticated
+  using (
+    exists (
+      select 1 from public.staff_members
+      where user_id = (select auth.uid()) and active = true
+    )
+  )
+  with check (
+    exists (
+      select 1 from public.staff_members
+      where user_id = (select auth.uid()) and active = true
+    )
+  );

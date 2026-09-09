@@ -5,17 +5,30 @@ import {ArrowRight,BriefcaseBusiness,Building2,Check,Landmark,MapPin,Menu,Messag
 const SUPABASE_URL="https://slrsyysqiftujhpxokdm.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY="sb_publishable_kjlZu6_e0Md4HV4MtnRdPg_UeXejXL1";
 function parseCurrency(value:string){return Number(value.replace(/[^\d,.-]/g,"").replace(/\./g,"").replace(",","."))}
+function formatPhone(value:string){const digits=value.replace(/\D/g,"").slice(0,11);if(digits.length<=2)return digits;if(digits.length<=6)return `(${digits.slice(0,2)}) ${digits.slice(2)}`;if(digits.length<=10)return `(${digits.slice(0,2)}) ${digits.slice(2,6)}-${digits.slice(6)}`;return `(${digits.slice(0,2)}) ${digits.slice(2,7)}-${digits.slice(7)}`}
+function formatCurrency(value:string){const digits=value.replace(/\D/g,"").slice(0,12);if(!digits)return "";return new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(digits)/100)}
+function cleanName(value:string){return value.replace(/[^\p{L}\s'-]/gu,"").replace(/\s{2,}/g," ").slice(0,120)}
 const solutions=[[UserRound,"Crédito pessoal","Para planos, projetos e imprevistos."],[Landmark,"Com garantia","Mais prazo e condições diferenciadas."],[BriefcaseBusiness,"Para empresas","Crédito para apoiar o seu negócio."]] as const;
 function Brand(){return <span className="brand"><img src="/imper-logo-transparent.png" alt="Imper Credi Brasil"/></span>}
 
 export default function Home(){
  const[menu,setMenu]=useState(false),[sent,setSent]=useState(false),[sending,setSending]=useState(false),[error,setError]=useState("");
  async function submit(e:React.FormEvent<HTMLFormElement>){
-  e.preventDefault();setError("");setSending(true);
+  e.preventDefault();setError("");
   const form=new FormData(e.currentTarget);
+  const fullName=String(form.get("nome")||"").trim();
+  const whatsapp=String(form.get("whatsapp")||"").trim();
+  const address=String(form.get("endereco")||"").trim();
+  const neighborhood=String(form.get("bairro")||"").trim();
+  const city=String(form.get("cidade")||"").trim();
   const desiredAmount=parseCurrency(String(form.get("valor")||""));
   const monthlyIncome=parseCurrency(String(form.get("renda")||""));
-  const lead={full_name:String(form.get("nome")||"").trim(),whatsapp:String(form.get("whatsapp")||"").trim(),address:String(form.get("endereco")||"").trim(),neighborhood:String(form.get("bairro")||"").trim(),city:String(form.get("cidade")||"").trim(),desired_amount:desiredAmount,monthly_income:monthlyIncome,consent_at:new Date().toISOString(),source:"site"};
+  if(fullName.split(/\s+/).length<2){setError("Digite seu nome e sobrenome.");return}
+  if(!/^\d{10,11}$/.test(whatsapp.replace(/\D/g,""))){setError("Digite um WhatsApp válido com DDD.");return}
+  if(address.length<5||neighborhood.length<2||city.length<2){setError("Confira o endereço, bairro e cidade.");return}
+  if(!Number.isFinite(desiredAmount)||desiredAmount<=0||!Number.isFinite(monthlyIncome)||monthlyIncome<=0){setError("Digite valores válidos para crédito e renda.");return}
+  setSending(true);
+  const lead={full_name:fullName,whatsapp,address,neighborhood,city,desired_amount:desiredAmount,monthly_income:monthlyIncome,consent_at:new Date().toISOString(),source:"site"};
   try{
    const response=await fetch(`${SUPABASE_URL}/rest/v1/leads`,{method:"POST",headers:{apikey:SUPABASE_PUBLISHABLE_KEY,Authorization:`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(lead)});
    if(!response.ok)throw new Error();
@@ -40,7 +53,7 @@ export default function Home(){
 
   <section className="section solutions" id="solucoes"><div className="heading"><p className="tag">SOLUÇÕES</p><h2>Encontre a melhor opção.</h2></div><div className="cards">{solutions.map(([Icon,title,text],i)=><article key={title}><small>0{i+1}</small><Icon/><h3>{title}</h3><p>{text}</p><a href="#simulacao">Simular <ArrowRight size={15}/></a></article>)}</div></section>
 
-  <section className="section simulation" id="simulacao"><div className="simulation-copy"><p className="tag">SIMULAÇÃO</p><h2>Vamos começar?</h2><p>Envie seus dados. Nossa equipe continua o atendimento pelo WhatsApp.</p></div><form onSubmit={submit}>{sent?<div className="success"><Check/><h3>Simulação recebida.</h3><p>Em breve, nossa equipe entrará em contato.</p><button type="button" onClick={()=>setSent(false)}>Fazer outra</button></div>:<><label>Nome<input name="nome" required autoComplete="name" placeholder="Seu nome completo"/></label><label>WhatsApp<input name="whatsapp" required inputMode="tel" autoComplete="tel" placeholder="(00) 00000-0000"/></label><label>Endereço<input name="endereco" required autoComplete="street-address" placeholder="Rua, avenida e número"/></label><div className="row"><label>Bairro<input name="bairro" required autoComplete="address-level3" placeholder="Seu bairro"/></label><label>Cidade<input name="cidade" required autoComplete="address-level2" placeholder="Sua cidade"/></label></div><div className="row"><label>Valor desejado<input name="valor" required inputMode="decimal" placeholder="R$ 10.000,00"/></label><label>Renda aproximada<input name="renda" required inputMode="decimal" placeholder="R$ 4.000,00"/></label></div><label className="consent"><input type="checkbox" required/><span>Autorizo o contato para continuar esta solicitação.</span></label>{error&&<p className="form-error" role="alert">{error}</p>}<button className="button dark" disabled={sending}>{sending?"Enviando...":"Solicitar atendimento"} {!sending&&<ArrowRight size={18}/>}</button></>}</form></section>
+  <section className="section simulation" id="simulacao"><div className="simulation-copy"><p className="tag">SIMULAÇÃO</p><h2>Vamos começar?</h2><p>Envie seus dados. Nossa equipe continua o atendimento pelo WhatsApp.</p></div><form onSubmit={submit}>{sent?<div className="success"><Check/><h3>Simulação recebida.</h3><p>Em breve, nossa equipe entrará em contato.</p><button type="button" onClick={()=>setSent(false)}>Fazer outra</button></div>:<><label>Nome completo<input name="nome" required minLength={3} maxLength={120} autoComplete="name" placeholder="Ex.: João da Silva" onInput={e=>{e.currentTarget.value=cleanName(e.currentTarget.value)}}/></label><label>WhatsApp<input name="whatsapp" required inputMode="tel" autoComplete="tel" placeholder="(00) 00000-0000" maxLength={15} onInput={e=>{e.currentTarget.value=formatPhone(e.currentTarget.value)}}/></label><label>Endereço<input name="endereco" required minLength={5} maxLength={180} autoComplete="street-address" placeholder="Ex.: Rua Central, 123"/></label><div className="row"><label>Bairro<input name="bairro" required minLength={2} maxLength={100} autoComplete="address-level3" placeholder="Ex.: Centro"/></label><label>Cidade<input name="cidade" required minLength={2} maxLength={100} autoComplete="address-level2" placeholder="Ex.: Florianópolis"/></label></div><div className="row"><label>Valor desejado<input name="valor" required inputMode="numeric" placeholder="R$ 10.000,00" onInput={e=>{e.currentTarget.value=formatCurrency(e.currentTarget.value)}}/></label><label>Renda aproximada<input name="renda" required inputMode="numeric" placeholder="R$ 4.000,00" onInput={e=>{e.currentTarget.value=formatCurrency(e.currentTarget.value)}}/></label></div><label className="consent"><input type="checkbox" required/><span>Autorizo o contato para continuar esta solicitação.</span></label>{error&&<p className="form-error" role="alert">{error}</p>}<button className="button dark" disabled={sending}>{sending?"Enviando...":"Solicitar atendimento"} {!sending&&<ArrowRight size={18}/>}</button></>}</form></section>
 
   <section className="contact" id="contato"><div><p className="tag">CONTATO</p><h2>Fale com a Imper Credi.</h2></div><a href="#simulacao"><MessageCircle/><span><small>ATENDIMENTO</small><strong>WhatsApp</strong></span><ArrowRight/></a><a href="https://www.instagram.com/impercredibrasil" target="_blank" rel="noreferrer"><Building2/><span><small>NOVIDADES</small><strong>Instagram</strong></span><ArrowRight/></a><a href="https://www.google.com/maps/search/?api=1&query=Av.+Central,+500,+Centro,+Florian%C3%B3polis,+SC" target="_blank" rel="noreferrer"><MapPin/><span><small>ENDEREÇO</small><strong>Localização</strong></span><ArrowRight/></a></section>
 

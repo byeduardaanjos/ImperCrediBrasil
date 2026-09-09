@@ -19,6 +19,7 @@ export default function Home(){
   try{
    const response=await fetch(`${SUPABASE_URL}/rest/v1/leads`,{method:"POST",headers:{apikey:SUPABASE_PUBLISHABLE_KEY,Authorization:`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(lead)});
    if(!response.ok)throw new Error();
+   if(document.activeElement instanceof HTMLElement)document.activeElement.blur();
    setSent(true);
   }catch{setError("Não conseguimos enviar agora. Tente novamente em instantes.")}
   finally{setSending(false)}
@@ -46,4 +47,3 @@ export default function Home(){
   <footer><Brand/><p>Crédito com clareza e confiança.</p><small>© 2026 Imper Credi Brasil</small></footer>
  </main>
 }
-

@@ -5,6 +5,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Imper Credi Brasil | Crédito com atendimento de verdade",
   description: "Faça sua simulação de crédito e receba atendimento personalizado da equipe Imper Credi Brasil.",
+  icons: {
+    icon: "/imper-logo-transparent.png",
+    shortcut: "/imper-logo-transparent.png",
+    apple: "/imper-logo-transparent.png",
+  },
 };
 
 export default function RootLayout({

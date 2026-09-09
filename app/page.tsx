@@ -38,6 +38,7 @@ export default function Home(){
   finally{setSending(false)}
  }
  useEffect(()=>{
+  if(window.matchMedia("(max-width: 700px)").matches)return;
   const elements=document.querySelectorAll(".trust,.section,.contact,footer,.cards article");
   elements.forEach(element=>element.classList.add("reveal"));
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("visible");observer.unobserve(entry.target)}}),{threshold:.12});

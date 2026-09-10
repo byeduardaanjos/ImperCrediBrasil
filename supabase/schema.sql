@@ -4,9 +4,15 @@ create table public.leads (
   updated_at timestamptz not null default now(),
   full_name text not null check (char_length(full_name) between 3 and 120),
   whatsapp text not null check (char_length(whatsapp) between 10 and 25),
+  email text check (email is null or (char_length(email) between 5 and 160 and position('@' in email) > 1)),
+  cpf text check (cpf is null or cpf ~ '^[0-9]{11}$'),
+  postal_code text check (postal_code is null or postal_code ~ '^[0-9]{8}$'),
   address text not null check (char_length(address) between 5 and 180),
+  address_number text check (address_number is null or char_length(address_number) between 1 and 20),
   neighborhood text not null check (char_length(neighborhood) between 2 and 100),
+  complement text check (complement is null or char_length(complement) <= 120),
   city text not null check (char_length(city) between 2 and 100),
+  state text check (state is null or state ~ '^[A-Z]{2}$'),
   desired_amount numeric(12, 2) not null check (desired_amount > 0),
   monthly_income numeric(12, 2) not null check (monthly_income > 0),
   consent_at timestamptz not null default now(),
@@ -23,7 +29,7 @@ create index leads_assigned_to_idx on public.leads (assigned_to);
 alter table public.leads enable row level security;
 
 revoke all on table public.leads from anon, authenticated;
-grant insert (full_name, whatsapp, address, neighborhood, city, desired_amount, monthly_income, consent_at, source)
+grant insert (full_name, whatsapp, email, cpf, postal_code, address, address_number, neighborhood, complement, city, state, desired_amount, monthly_income, consent_at, source)
   on table public.leads to anon;
 grant select, insert, update, delete on table public.leads to service_role;
 

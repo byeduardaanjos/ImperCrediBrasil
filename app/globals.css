@@ -112,5 +112,5 @@ header{background:linear-gradient(180deg,#111111c7 0%,#0909099e 72%,#09090966 10
 .form-error{margin:.2rem 0 .8rem;color:#ff858c;font-size:.74rem}.simulation button:disabled{cursor:wait;opacity:.65;transform:none}
 @media(max-width:700px){.simulation input:not([type=checkbox]){font-size:16px}}
 .simulation form{border-radius:12px;font-family:Manrope,"Helvetica Neue",Arial,sans-serif}.simulation label{margin-bottom:1.15rem;gap:.5rem;font-size:.78rem;line-height:1.35}.simulation input:not([type=checkbox]){height:52px;padding:0 1rem;border-radius:8px;font-size:1rem}.simulation .consent{gap:.6rem;font-size:.76rem;line-height:1.5}.simulation .button{border-radius:8px}.form-error{font-size:.8rem;line-height:1.45}
+.phone-field{display:grid;grid-template-columns:62px 1fr}.phone-field>span{height:52px;display:grid;place-items:center;color:#aaa69f;background:#08080a;border:1px solid #ffffff30;border-right:0;border-radius:8px 0 0 8px}.phone-field input{border-radius:0 8px 8px 0!important}.address-row{grid-template-columns:2fr .65fr}.city-row{grid-template-columns:2fr .45fr}
 @media(max-width:700px){.simulation form{padding:1.5rem}.simulation label{margin-bottom:1rem;font-size:.82rem}.simulation input:not([type=checkbox]){height:54px}.simulation .row{gap:0}}
-

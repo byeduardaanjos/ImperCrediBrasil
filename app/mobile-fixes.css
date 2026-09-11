@@ -24,18 +24,38 @@
     opacity: 1 !important;
   }
 
+  header {
+    justify-content: space-between !important;
+  }
+
+  header > a:first-child {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    margin-right: auto !important;
+    flex: 0 0 auto !important;
+  }
+
   header .brand {
-    width: 118px !important;
-    height: 44px !important;
+    width: 108px !important;
+    height: 42px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
     overflow: visible !important;
   }
 
   header .brand img {
-    display: block;
+    display: block !important;
     width: 100% !important;
     height: 100% !important;
     object-fit: contain !important;
-    transform: scale(1.16);
-    transform-origin: left center;
+    object-position: left center !important;
+    transform: none !important;
+  }
+
+  header .menu-button {
+    margin-left: auto !important;
+    flex: 0 0 auto !important;
   }
 }

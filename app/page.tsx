@@ -13,7 +13,7 @@ function formatCpf(value:string){const digits=value.replace(/\D/g,"").slice(0,11
 function formatCep(value:string){const digits=value.replace(/\D/g,"").slice(0,8);return digits.replace(/^(\d{5})(\d)/,"$1-$2")}
 function validCpf(value:string){const cpf=value.replace(/\D/g,"");if(cpf.length!==11||/^(\d)\1{10}$/.test(cpf))return false;const digit=(length:number)=>{let sum=0;for(let i=0;i<length;i++)sum+=Number(cpf[i])*(length+1-i);const rest=(sum*10)%11;return rest===10?0:rest};return digit(9)===Number(cpf[9])&&digit(10)===Number(cpf[10])}
 const solutions=[[UserRound,"Crédito pessoal","Para planos, projetos e imprevistos."],[Landmark,"Com garantia","Mais prazo e condições diferenciadas."],[BriefcaseBusiness,"Para empresas","Crédito para apoiar o seu negócio."]] as const;
-function Brand(){return <span className="brand"><img src="/imper-logo-transparent.png" alt="Imper Credi Brasil"/></span>}
+function Brand(){return <span className="brand"><img src="/imper-logo.png" alt="Imper Credi Brasil"/></span>}
 
 export default function Home(){
  const[menu,setMenu]=useState(false),[sent,setSent]=useState(false),[sending,setSending]=useState(false),[error,setError]=useState("");

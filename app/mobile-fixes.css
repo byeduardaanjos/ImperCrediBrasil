@@ -1,6 +1,5 @@
 @media (max-width: 700px) {
-  /* No iOS o PNG do hero estava gerando uma faixa/artefato visual.
-     No mobile usamos um fundo equivalente em CSS para eliminar o problema. */
+  /* Corrige o artefato visual do hero no iOS sem alterar o cabeçalho/logo. */
   .hero {
     animation: none !important;
     background-image:
@@ -22,40 +21,5 @@
     animation: none !important;
     transform: none !important;
     opacity: 1 !important;
-  }
-
-  header {
-    justify-content: space-between !important;
-  }
-
-  header > a:first-child {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    margin-right: auto !important;
-    flex: 0 0 auto !important;
-  }
-
-  header .brand {
-    width: 108px !important;
-    height: 42px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    overflow: visible !important;
-  }
-
-  header .brand img {
-    display: block !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: contain !important;
-    object-position: left center !important;
-    transform: none !important;
-  }
-
-  header .menu-button {
-    margin-left: auto !important;
-    flex: 0 0 auto !important;
   }
 }

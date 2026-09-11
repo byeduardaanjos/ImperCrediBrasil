@@ -1,0 +1,32 @@
+@media (max-width: 700px) {
+  /* Evita artefatos de renderização do Safari/iOS no hero sem alterar o layout. */
+  .hero {
+    animation: none !important;
+    background-position: 62% center !important;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .hero .tag,
+  .hero h1,
+  .hero > p:not(.tag),
+  .hero > .button {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  header .brand {
+    width: 96px !important;
+    height: 40px !important;
+  }
+
+  header .brand img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}

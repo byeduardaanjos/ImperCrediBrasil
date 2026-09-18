@@ -6,7 +6,7 @@ header{height:78px;position:fixed;inset:0 0 auto;z-index:50;padding:0 clamp(1.2r
 .section{padding:clamp(5rem,9vw,8.5rem) clamp(1.2rem,6vw,6.5rem)}.heading{max-width:620px;margin-bottom:3.5rem}.section h2,.contact h2{margin:1rem 0 0;font-size:clamp(2.7rem,4.6vw,4.7rem);line-height:1;letter-spacing:-.055em;font-weight:800}.solutions{background:#f2f1ed;color:#111}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.cards article{min-height:300px;padding:2rem;display:flex;flex-direction:column;background:#fff;border:1px solid #d7d4cc}.cards small{color:var(--red);font-size:.65rem;font-weight:800}.cards>article>svg{width:25px;height:25px;margin:3rem 0 1.3rem;color:#252525;stroke-width:1.5}.cards h3{margin:0 0 .7rem;font-size:1.25rem;font-weight:800}.cards p{margin:0;color:#74716b;font-size:.8rem}.cards a{margin-top:auto;display:flex;align-items:center;gap:.5rem;color:var(--red);font-size:.7rem;font-weight:800}
 .simulation{display:grid;grid-template-columns:.75fr 1fr;gap:9vw;align-items:center}.simulation-copy h2{margin-top:1rem}.simulation-copy>p:last-child{max-width:480px;color:#918f89;line-height:1.7}.simulation form{padding:2.4rem;background:#f2f1ed;color:#171717;border-top:4px solid var(--red)}.simulation label{margin-bottom:1rem;display:grid;gap:.45rem;color:#4d4a45;font-size:.68rem;font-weight:750}.simulation input:not([type=checkbox]){height:46px;padding:0 .8rem;background:#fff;border:1px solid #cbc7be;outline:none}.simulation input:focus{border-color:var(--red)}.row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.simulation .consent{display:flex;align-items:flex-start;font-weight:500;color:#716d66;font-size:.62rem}.consent input{accent-color:var(--red)}.dark{width:100%;color:#fff;background:#171717}.dark:hover{background:var(--red)}.success{min-height:330px;display:grid;place-content:center;text-align:center}.success>svg{margin:auto;color:var(--red)}.success h3{font-size:1.5rem}.success p{color:#6f6b65}.success button{margin:auto;background:none;border:0;border-bottom:1px solid var(--red);cursor:pointer}
 .contact{padding:clamp(5rem,8vw,7rem) clamp(1.2rem,6vw,6.5rem);display:grid;grid-template-columns:1.2fr repeat(3,.55fr);align-items:stretch;border-block:1px solid var(--line)}.contact>div{padding-right:3rem}.contact>a{min-height:150px;padding:1.6rem;display:flex;align-items:center;gap:1rem;border-left:1px solid var(--line)}.contact>a>svg:first-child{width:21px;color:var(--red)}.contact>a>svg:last-child{width:17px;margin-left:auto}.contact span{display:grid;gap:.4rem}.contact small{color:#76736d;font-size:.55rem;letter-spacing:.15em}.contact strong{font-size:.9rem}footer{padding:2.5rem clamp(1.2rem,5vw,4.5rem);display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:2rem;color:#77746e}footer p,footer small{font-size:.65rem}footer small{text-align:right}
-.hero{position:relative;isolation:isolate;background-image:linear-gradient(90deg,#0505058c,#05050524 55%,#05050559),linear-gradient(180deg,#0505051f 0%,transparent 65%,#050505c7 100%),url("/hero-imper-neon.png");background-size:cover;background-position:center}
+.hero{position:relative;isolation:isolate;background-image:linear-gradient(90deg,#0505058c,#05050524 55%,#05050559),linear-gradient(180deg,#0505051f 0%,transparent 65%,#050505c7 100%),url("/IMG_9494.png");background-size:cover;background-position:center}
 .hero h1{text-shadow:0 8px 32px #000}.hero>p:not(.tag){color:#d0cec8;text-shadow:0 3px 18px #000}
 .trust svg{color:var(--gold)}
 .solutions{color:var(--white);background:#090909}.solutions .tag{color:var(--gold)}
@@ -171,4 +171,12 @@ header{background:linear-gradient(180deg,#111111c7 0%,#0909099e 72%,#09090966 10
  }
  .hero>p:not(.tag){font-size:.94rem}
  .hero .red{margin-top:1.35rem}
+}
+
+/* Hero layout: left-aligned copy over the new full background. */
+@media (min-width:701px){
+ .hero{align-items:flex-start;text-align:left;padding-left:clamp(3.5rem,7vw,8rem);padding-right:clamp(3rem,7vw,7rem);background-position:center center!important}
+ .hero h1{max-width:760px;margin-left:0;margin-right:0}
+ .hero h1:after{margin-left:0;margin-right:0}
+ .hero>p:not(.tag){max-width:560px;margin-left:0;margin-right:0}
 }

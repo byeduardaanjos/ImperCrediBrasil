@@ -145,3 +145,30 @@ header{background:linear-gradient(180deg,#111111c7 0%,#0909099e 72%,#09090966 10
  }
  .hero .red{margin-top:1.4rem}
 }
+
+
+/* Hotfix notebook hero: remove the visible seam caused by animated background-position
+   and keep the hero artwork continuous through common laptop viewports. */
+@media (min-width:701px){
+ .hero{
+  animation:none !important;
+  background-size:cover !important;
+  background-repeat:no-repeat !important;
+  background-position:center center !important;
+ }
+}
+@media (min-width:701px) and (max-width:1366px){
+ .hero{
+  min-height:100vh !important;
+  min-height:100svh !important;
+  padding:110px 1.5rem 52px !important;
+ }
+ .hero h1{
+  max-width:900px;
+  margin:1rem 0 !important;
+  font-size:clamp(3.25rem,5.6vw,4.9rem) !important;
+  line-height:.96 !important;
+ }
+ .hero>p:not(.tag){font-size:.94rem}
+ .hero .red{margin-top:1.35rem}
+}

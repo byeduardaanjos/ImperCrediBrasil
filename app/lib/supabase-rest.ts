@@ -9,7 +9,7 @@ export type AuthSession={
  user:{id:string;email?:string};
 };
 
-const SESSION_KEY="impercredi_admin_session";
+const SESSION_KEY="credheinz_admin_session";
 
 export function saveSession(session:AuthSession){
  const value={...session,expires_at:session.expires_at??Math.floor(Date.now()/1000)+session.expires_in};
